@@ -5,16 +5,57 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head>
-<body>
+<h:head>
+	<link type="text/css" rel="stylesheet"
+		href="/turismo-web/resources/css/bootstrapcerulean.css" />
 
+</h:head>
+<body>
 	<ui:composition template="templates/default.xhtml">
 		<ui:define name="content">
+			<div class="center-block col-sm-6 form-group">
+				<p:dialog id="dlgLogin" closable="false" resizable="false"
+					modal="true" width="500" height="250" widgetVar="wgtDlgLogin"
+					header="Inicio de sesion" draggable="false">
+					<div class="center-block col-sm-12 form-group">
+						<h:form id="form1" class="form-horizontal">
+						
+							<div class="col-sm-12 form-group">
+								<p:messages autoUpdate="true" globalOnly="true" id="mensaje"></p:messages>
+							</div>
+							
+							<div class="clearfix"></div>
+							
+							<div class="col-sm-12 form-group nofloat">
+								<p:inputText placeholder="Usuario"  id="txtUser" value="#{loginBean.usuario}"
+									required="true">
+									<p:ajax update="msgUser" event="blur"></p:ajax>
+								</p:inputText>
+								<p:message for="txtUser" id="msgUser"></p:message>
+							</div>
+							
+							<div class="clearfix"></div>
+							
+							<div class="col-sm-12 form-group">
+								<p:inputText placeholder="Password" 
+									id="txtPass"
+									value="#{loginBean.password}"
+									required="true">
+									<p:ajax update="msgPass" event="blur"></p:ajax>
+								</p:inputText>
+								<p:message for="txtPass" id="msgPass"></p:message>
+							</div>
+							
+							<div class="clearfix"></div>
+							
+							<div class="col-sm-12 form-group">
+								<p:commandButton action="#{loginBean.logear}" value="Aceptar" process="@form" />
+							</div>
+						</h:form>
+					</div>
+				</p:dialog>
 
-			<p:dialog id="dlgLogin" closable="false" resizable="true"
-				widgetVar="wgtDlgLogin">
-
-			</p:dialog>
+			</div>
 
 
 			<div class="modal">
@@ -38,14 +79,12 @@
 				</div>
 			</div>
 
-
+			<script>
+				$( document ).ready(function() {
+					PF('wgtDlgLogin').show();
+				});
+			</script>
 		</ui:define>
 	</ui:composition>
-	<script>
-		/*$( document ).ready(function() {
-			PF('wgtDlgLogin').show();
-		});*/
-	</script>
-	
 </body>
 </html>
